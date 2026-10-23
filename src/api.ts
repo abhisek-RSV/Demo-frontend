@@ -31,3 +31,11 @@ export const getNotes = () => request<Note[]>('/notes')
 
 export const addNote = (text: string) =>
   request<Note>('/notes', { method: 'POST', body: JSON.stringify({ text }) })
+
+export const deleteNote = async (id: number) => {
+  const res = await fetch(`${API}/notes/${id}`, { method: 'DELETE' })
+  return res.json()
+}
+
+export const searchNotes = (query: string) =>
+  request<Note[]>(`/notes?q=${query}`)
